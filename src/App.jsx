@@ -1,12 +1,15 @@
 import { useState } from "react";
 import "./App.css";
 import tasks from "./images/tasks.jpg";
+import { Button } from "./UI/Button/Button";
+import { Input } from "./UI/Input/Input";
+import { CheckBox } from "./UI/CheckBox/CheckBox";
 
 function App() {
   const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [isCompleted, setIsCompleted] = useState(false);
+  const [isCompleted, setIsCompleted] = useState(true);
   const [priorite, setPrioritete] = useState("");
 
   const addTodo = () => {
@@ -23,6 +26,9 @@ function App() {
     setDescription("");
   };
   const deleteTodo = (id) => [setTodos(todos.filter((todo) => todo.id !== id))];
+  const toggleTodo = () => {
+    setIsCompleted(!isCompleted);
+  };
   return (
     <div className="App">
       <nav className="navbar">
@@ -38,19 +44,22 @@ function App() {
         <div>logo</div>
       </nav>
       <div className="add-form">
-        <input
-          value={title}
-          onChange={(e) => setTitle(e.target.value)}
-          type="text"
-          placeholder="title"
-        />
-        <input
-          value={description}
-          onChange={(e) => setDescription(e.target.value)}
-          type="text"
-          placeholder="descrition"
-        />
-        <button onClick={addTodo}>add todo</button>
+        <div>
+          <Input
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
+            type="text"
+            placeholder="title"
+          />
+          <Input
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            type="text"
+            placeholder="descrition"
+          />
+        </div>
+
+        <Button onClick={addTodo}>+</Button>
       </div>
       {todos.length === 0 ? (
         <div className="home">
@@ -62,7 +71,7 @@ function App() {
         todos.map((todo) => (
           <div key={todo.id} className="home-todos">
             <div>
-              <input type="checkbox" />
+              <CheckBox checked={isCompleted} onChange={toggleTodo} />
             </div>
             <div>
               <h2>{todo.title}</h2>

@@ -25,9 +25,12 @@
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  gap: 30px;
+  min-width: 40vw;
+  background-color: rgb(54, 54, 54);
+  margin-bottom: 20px;
 }
 .add-form {
+  box-sizing: inherit;
   margin-bottom: 20px;
 }
 a {
