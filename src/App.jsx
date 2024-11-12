@@ -1,23 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import tasks from "./images/tasks.jpg";
 import { Button } from "./UI/Button/Button";
 import { Input } from "./UI/Input/Input";
-import { CheckBox } from "./UI/CheckBox/CheckBox";
+import { TodoItem } from "./TodoItem/TodoItem";
 
 function App() {
-  const [todos, setTodos] = useState([]);
+  const [todos, setTodos] = useState([
+    {
+      title: "JS",
+      description: "function App() {",
+      priorite: "1",
+      isCompleted: false,
+      time: "fdf",
+      id: 1,
+    },
+    {
+      title: "TS",
+      description: ";kj;konst [description, setDescription]",
+      priorite: "1",
+      isCompleted: false,
+      time: "fdf",
+      id: 2,
+    },
+    {
+      title: "C#",
+      description: "fdfdfonst addTodo = () => {",
+      priorite: "1",
+      isCompleted: false,
+      time: "fdf",
+      id: 3,
+    },
+  ]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
-  const [isCompleted, setIsCompleted] = useState(true);
   const [priorite, setPrioritete] = useState("");
-
+  const [sort, setSort] = useState("");
   const addTodo = () => {
     const newTodo = {
       title: title,
       description: description,
       priorite: priorite,
-      isCompleted: isCompleted,
+      isCompleted: false,
       time: "fdf",
       id: Math.random(),
     };
@@ -26,9 +50,16 @@ function App() {
     setDescription("");
   };
   const deleteTodo = (id) => [setTodos(todos.filter((todo) => todo.id !== id))];
-  const toggleTodo = () => {
-    setIsCompleted(!isCompleted);
+
+  const sortedPosts = (sort) => {
+    debugger;
+    setSort(sort);
+    setTodos([...todos].sort((a, b) => a[sort]?.localeCompare(b[sort])));
   };
+  // console.log(todos);
+
+  console.log(sort);
+
   return (
     <div className="App">
       <nav className="navbar">
@@ -61,6 +92,13 @@ function App() {
 
         <Button onClick={addTodo}>+</Button>
       </div>
+      <div className="select">
+        <select value={sort} onChange={(e) => sortedPosts(e.target.value)}>
+          <option defaultValue="Сортировка по"></option>
+          <option value="title">title</option>
+          <option value="description">description</option>
+        </select>
+      </div>
       {todos.length === 0 ? (
         <div className="home">
           <img src={tasks} alt="tasks" width={250} />
@@ -70,19 +108,7 @@ function App() {
       ) : (
         todos.map((todo) => (
           <div key={todo.id} className="home-todos">
-            <div>
-              <CheckBox checked={isCompleted} onChange={toggleTodo} />
-            </div>
-            <div>
-              <h2>{todo.title}</h2>
-              <h3>{todo.time}</h3>
-            </div>
-            <div>
-              <h4>{todo.priorite}</h4>
-            </div>
-            <div>
-              <button onClick={() => deleteTodo(todo.id)}>deleteTodo</button>
-            </div>
+            <TodoItem todo={todo} deleteTodo={deleteTodo} />
           </div>
         ))
       )}
