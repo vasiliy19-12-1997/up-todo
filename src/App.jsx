@@ -1,9 +1,10 @@
-import { useEffect, useState } from "react";
+import { useMemo, useState } from "react";
 import "./App.css";
 import tasks from "./images/tasks.jpg";
+import { TodoItem } from "./TodoItem/TodoItem";
 import { Button } from "./UI/Button/Button";
 import { Input } from "./UI/Input/Input";
-import { TodoItem } from "./TodoItem/TodoItem";
+import { useFilter } from "./Hooks/useFilter";
 
 function App() {
   const [todos, setTodos] = useState([
@@ -36,6 +37,8 @@ function App() {
   const [description, setDescription] = useState("");
   const [priorite, setPrioritete] = useState("");
   const [sort, setSort] = useState("");
+  const [query, setQuery] = useState("");
+  const sortedAndSearchTodos = useFilter(sort, todos, query);
   const addTodo = () => {
     const newTodo = {
       title: title,
@@ -51,14 +54,9 @@ function App() {
   };
   const deleteTodo = (id) => [setTodos(todos.filter((todo) => todo.id !== id))];
 
-  const sortedPosts = (sort) => {
-    debugger;
+  const sortTodos = (sort) => {
     setSort(sort);
-    setTodos([...todos].sort((a, b) => a[sort]?.localeCompare(b[sort])));
   };
-  // console.log(todos);
-
-  console.log(sort);
 
   return (
     <div className="App">
@@ -93,11 +91,12 @@ function App() {
         <Button onClick={addTodo}>+</Button>
       </div>
       <div className="select">
-        <select value={sort} onChange={(e) => sortedPosts(e.target.value)}>
+        <select value={sort} onChange={(e) => sortTodos(e.target.value)}>
           <option defaultValue="Сортировка по"></option>
           <option value="title">title</option>
           <option value="description">description</option>
         </select>
+        <Input value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
       {todos.length === 0 ? (
         <div className="home">
@@ -106,7 +105,7 @@ function App() {
           <h3>Tap + to add your tasks</h3>
         </div>
       ) : (
-        todos.map((todo) => (
+        sortedAndSearchTodos.map((todo) => (
           <div key={todo.id} className="home-todos">
             <TodoItem todo={todo} deleteTodo={deleteTodo} />
           </div>
