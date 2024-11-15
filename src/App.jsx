@@ -1,44 +1,23 @@
-import { useMemo, useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 import "./App.css";
+import { useFilter } from "./Hooks/useFilter";
 import tasks from "./images/tasks.jpg";
 import { TodoItem } from "./TodoItem/TodoItem";
 import { Button } from "./UI/Button/Button";
 import { Input } from "./UI/Input/Input";
-import { useFilter } from "./Hooks/useFilter";
+import { todoService } from "./API/TodoService";
 
-function App() {
-  const [todos, setTodos] = useState([
-    {
-      title: "JS",
-      description: "function App() {",
-      priorite: "1",
-      isCompleted: false,
-      time: "fdf",
-      id: 1,
-    },
-    {
-      title: "TS",
-      description: ";kj;konst [description, setDescription]",
-      priorite: "1",
-      isCompleted: false,
-      time: "fdf",
-      id: 2,
-    },
-    {
-      title: "C#",
-      description: "fdfdfonst addTodo = () => {",
-      priorite: "1",
-      isCompleted: false,
-      time: "fdf",
-      id: 3,
-    },
-  ]);
+export default function App() {
+  const [todos, setTodos] = useState([]);
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [priorite, setPrioritete] = useState("");
   const [sort, setSort] = useState("");
   const [query, setQuery] = useState("");
+  const [isLoading, setIsLoading] = useState(true);
   const sortedAndSearchTodos = useFilter(sort, todos, query);
+
   const addTodo = () => {
     const newTodo = {
       title: title,
@@ -53,10 +32,21 @@ function App() {
     setDescription("");
   };
   const deleteTodo = (id) => [setTodos(todos.filter((todo) => todo.id !== id))];
-
   const sortTodos = (sort) => {
     setSort(sort);
   };
+  async function getTodos() {
+    setIsLoading(true);
+    const response = await todoService.getTodos();
+    setTodos(response);
+    setIsLoading(false);
+    console.log(response);
+  }
+  useEffect(() => {
+    setTimeout(() => {
+      getTodos();
+    }, 1000);
+  }, []);
 
   return (
     <div className="App">
@@ -98,7 +88,12 @@ function App() {
         </select>
         <Input value={query} onChange={(e) => setQuery(e.target.value)} />
       </div>
-      {todos.length === 0 ? (
+      {isLoading && (
+        <div style={{ display: "flex", justifyContent: "center" }}>
+          Loading...
+        </div>
+      )}
+      {sortedAndSearchTodos.length === 0 && !isLoading ? (
         <div className="home">
           <img src={tasks} alt="tasks" width={250} />
           <h2>What do you want to do today</h2>
@@ -114,5 +109,3 @@ function App() {
     </div>
   );
 }
-
-export default App;
