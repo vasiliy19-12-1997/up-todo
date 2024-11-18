@@ -1,0 +1,11 @@
+.TodoItem {
+  background-color: rgb(54, 54, 54);
+  width: 100%;
+  margin-bottom: 20px;
+  padding: 20px;
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}

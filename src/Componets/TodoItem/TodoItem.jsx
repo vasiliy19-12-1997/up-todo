@@ -1,12 +1,14 @@
+import s from "./TodoItem.module.css";
 import { useState } from "react";
 export const TodoItem = ({ todo, deleteTodo }) => {
-  const [isCompleted, setisCompleted] = useState(false);
+  const [isCompleted, setisCompleted] = useState(todo.completed || false);
   const toggleTodos = (id) => {
     setisCompleted(!isCompleted);
     deleteTodo(id);
   };
+
   return (
-    <div>
+    <div className={s.TodoItem}>
       <div>
         <input
           type="checkbox"
