@@ -1,53 +1,23 @@
-import { useEffect, useState } from "react";
-import { TodoService } from "./API/TodoService";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import "./App.css";
-import { AddForm } from "./Componets/AddForm/AddForm";
-import { Filter } from "./Componets/Filter/Filter";
-import { Navbar } from "./Componets/Navbar/Navbar";
-import { TodoList } from "./Componets/TodoList/TodoList";
-import { useFetching } from "./Hooks/useFetching";
-import { useFilter } from "./Hooks/useFilter";
-import tasks from "./Images/tasks.jpg";
-import { TodoItem } from "./Componets/TodoItem/TodoItem";
-import { DefaultPage } from "./Componets/DefaultPage/DefaultPage";
+import { DefaultPage } from "./Componets/Pages/DefaultPage/DefaultPage";
+import { Home } from "./Componets/Pages/Home/Home";
+import { Link1 } from "./Componets/Pages/Link1/Link1";
+import { Link2 } from "./Componets/Pages/Link2/Link2";
+import { Link3 } from "./Componets/Pages/Link3/Link3";
+import { Link4 } from "./Componets/Pages/Link4/Link4";
 export default function App() {
-  const [todos, setTodos] = useState([]);
-  const [sort, setSort] = useState("");
-  const [query, setQuery] = useState("");
-  const sortedAndSearchTodos = useFilter(sort, todos, query);
-
-  const [fetching, isLoading, error] = useFetching(async () => {
-    const response = await TodoService.getTodos();
-    setTodos(response);
-  });
-
-  const createTodos = (newTodo) => {
-    setTodos([...todos, newTodo]);
-  };
-  const deleteTodo = (id) => [setTodos(todos.filter((todo) => todo.id !== id))];
-
-  useEffect(() => {
-    fetching();
-  }, []);
-
   return (
-    <div className="App">
-      <Navbar />
-      <AddForm create={createTodos} />
-      <Filter sort={sort} query={query} setQuery={setQuery} setSort={setSort} />
-      {isLoading && (
-        <div style={{ display: "flex", justifyContent: "center" }}>
-          Loading...
-        </div>
-      )}
-      {error && <h1>{error}</h1>}
-      {sortedAndSearchTodos.length === 0 && !isLoading ? (
-        <DefaultPage />
-      ) : (
-        <div className="home-todos">
-          <TodoList todos={sortedAndSearchTodos} deleteTodo={deleteTodo} />
-        </div>
-      )}
-    </div>
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Home />}>
+          <Route path="Link1" element={<Link1 />} />
+          <Route path="Link2" element={<Link2 />} />
+          <Route path="Link3" element={<Link3 />} />
+          <Route path="Link4" element={<Link4 />} />
+        </Route>
+        <Route path="/default" element={<DefaultPage />} />
+      </Routes>
+    </BrowserRouter>
   );
 }
