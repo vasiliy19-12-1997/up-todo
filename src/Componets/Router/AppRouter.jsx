@@ -1,11 +1,15 @@
 import { Route, Routes } from "react-router-dom";
-import { privateRoutes } from "./Router";
+import { privateRoutes, publicRoutes } from "./Router";
+import { useState } from "react";
 export const AppRouter = () => {
+  const [login, setLogin] = useState(true);
+  debugger;
   return (
     <Routes>
-      {privateRoutes.map((route) => (
-        <Route path={route.path} element={route.element} />
-      ))}
+      {login &&
+        privateRoutes.map((route) => (
+          <Route route={route.path} element={route.element} />
+        ))}
     </Routes>
   );
 };

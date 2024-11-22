@@ -1,4 +1,4 @@
-import tasks from "../../../Images/tasks.jpg";
+import tasks from "../../../images/tasks.jpg";
 
 export const DefaultPage = () => {
   return (
