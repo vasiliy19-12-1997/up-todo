@@ -1,11 +1,11 @@
-import { useFetching } from "../../Hooks/useFetching";
+import { useState } from "react";
 import { Button } from "../UI/Button/Button";
 import { Input } from "../UI/Input/Input";
-import { useState } from "react";
-export const AddForm = ({ create: createTodos }) => {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
+import { useFiled } from "../../Hooks/useField";
+export const AddForm = ({ createTodos }) => {
   const [priorite, setPrioritete] = useState("");
+  const [title, onChangeTitl, resetTitl] = useFiled();
+  const [description, onChangeDescr, resetDescr] = useFiled();
 
   const addTodo = () => {
     const newTodo = {
@@ -17,21 +17,21 @@ export const AddForm = ({ create: createTodos }) => {
       id: Math.random(),
     };
     createTodos(newTodo);
-    setTitle("");
-    setDescription("");
+    resetTitl();
+    resetDescr();
   };
   return (
     <div className="add-form">
       <div>
         <Input
           value={title}
-          onChange={(e) => setTitle(e.target.value)}
+          onChange={(e) => onChangeTitl(e)}
           type="text"
           placeholder="title"
         />
         <Input
           value={description}
-          onChange={(e) => setDescription(e.target.value)}
+          onChange={(e) => onChangeDescr(e)}
           type="text"
           placeholder="descrition"
         />

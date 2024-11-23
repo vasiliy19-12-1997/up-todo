@@ -1,3 +1,4 @@
+import { Button } from "../UI/Button/Button";
 import s from "./TodoItem.module.css";
 import { useState } from "react";
 export const TodoItem = ({ todo, deleteTodo }) => {
@@ -18,13 +19,13 @@ export const TodoItem = ({ todo, deleteTodo }) => {
       </div>
       <div>
         <h2>{todo.title}</h2>
-        <h3>{todo.time}</h3>
+        <h3>{todo.description}</h3>
       </div>
       <div>
         <h4>{todo.priorite}</h4>
       </div>
       <div>
-        <button onClick={() => deleteTodo(todo.id)}>deleteTodo</button>
+        <Button onClick={() => deleteTodo(todo.id)}>deleteTodo</Button>
       </div>
     </div>
   );

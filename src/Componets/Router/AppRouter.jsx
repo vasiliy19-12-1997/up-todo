@@ -1,15 +1,22 @@
+import { useContext } from "react";
 import { Route, Routes } from "react-router-dom";
+import { AuthContext } from "../../App";
 import { privateRoutes, publicRoutes } from "./Router";
-import { useState } from "react";
+import { Loader } from "../UI/Loader/Loader";
 export const AppRouter = () => {
-  const [login, setLogin] = useState(true);
-  debugger;
+  const [auth, setIsAuth, isLoading] = useContext(AuthContext);
+  if (isLoading) {
+    return <Loader />;
+  }
   return (
     <Routes>
-      {login &&
-        privateRoutes.map((route) => (
-          <Route route={route.path} element={route.element} />
-        ))}
+      {auth
+        ? privateRoutes.map((route) => (
+            <Route path={route.path} element={route.element} />
+          ))
+        : publicRoutes.map((route) => (
+            <Route path={route.path} element={route.element} />
+          ))}
     </Routes>
   );
 };

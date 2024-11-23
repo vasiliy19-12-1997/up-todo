@@ -7,7 +7,6 @@ export function useFetching(callback) {
   async function fetching() {
     try {
       setIsLoading(true);
-
       await callback();
     } catch (error) {
       setError(error.message);
