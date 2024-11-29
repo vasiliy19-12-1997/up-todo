@@ -1,7 +1,9 @@
-import { useState } from "react";
-import { Button } from "../UI/Button/Button";
+import { useState, useRef } from "react";
+import { MyButton } from "../UI/MyButton/MyButton";
 import { Input } from "../UI/Input/Input";
 import { useFiled } from "../../Hooks/useField";
+
+import "./AddForm.css";
 export const AddForm = ({ createTodos }) => {
   const [priorite, setPrioritete] = useState("");
   const [title, onChangeTitl, resetTitl] = useFiled();
@@ -37,7 +39,7 @@ export const AddForm = ({ createTodos }) => {
         />
       </div>
 
-      <Button onClick={addTodo}>+</Button>
+      <MyButton onClick={addTodo}>+</MyButton>
     </div>
   );
 };

@@ -1,0 +1,17 @@
+.todos-enter {
+  opacity: 0;
+  transform: scale(0.9);
+}
+.todos-enter-active {
+  opacity: 1;
+  transform: translateX(0);
+  transition: opacity 300ms, transform 300ms;
+}
+.todos-exit {
+  opacity: 1;
+}
+.todos-exit-active {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 300ms, transform 300ms;
+}

@@ -1,17 +1,22 @@
 import { Input } from "../UI/Input/Input";
+import { MySelect } from "../UI/MySelect/MySelect";
 
-export const Filter = ({ sort, query, setQuery, setSort }) => {
-  const sortTodos = (sort) => {
-    setSort(sort);
-  };
+export const Filter = ({ filter, setFilter }) => {
   return (
     <div style={{ marginBottom: "20px" }} className="select">
-      <select value={sort} onChange={(e) => sortTodos(e.target.value)}>
-        <option defaultValue="Сортировка по"></option>
-        <option value="title">title</option>
-        <option value="description">description</option>
-      </select>
-      <Input value={query} onChange={(e) => setQuery(e.target.value)} />
+      <MySelect
+        options={[
+          { value: "title", name: "По заголовку" },
+          { value: "description", name: "По описанию" },
+        ]}
+        value={filter.sort}
+        defaultValue={"Сортировка по"}
+        onChange={(selectSort) => setFilter({ ...filter, sort: selectSort })}
+      />
+      <Input
+        value={filter.query}
+        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
+      />
     </div>
   );
 };

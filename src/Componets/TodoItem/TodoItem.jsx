@@ -1,6 +1,7 @@
-import { Button } from "../UI/Button/Button";
+import { MyButton } from "../UI/MyButton/MyButton";
 import s from "./TodoItem.module.css";
 import { useState } from "react";
+
 export const TodoItem = ({ todo, deleteTodo }) => {
   const [isCompleted, setisCompleted] = useState(todo.completed || false);
   const toggleTodos = (id) => {
@@ -25,7 +26,7 @@ export const TodoItem = ({ todo, deleteTodo }) => {
         <h4>{todo.priorite}</h4>
       </div>
       <div>
-        <Button onClick={() => deleteTodo(todo.id)}>deleteTodo</Button>
+        <MyButton onClick={() => deleteTodo(todo.id)}>deleteTodo</MyButton>
       </div>
     </div>
   );

@@ -1,5 +1,5 @@
-import s from "./Button.module.css";
-export const Button = ({ children, ...props }) => {
+import s from "./MyButton.module.css";
+export const MyButton = ({ children, ...props }) => {
   return (
     <>
       <button className={s.Button} {...props}>

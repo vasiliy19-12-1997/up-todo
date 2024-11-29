@@ -2,19 +2,19 @@ import { useEffect, useState } from "react";
 import { TodoService } from "../../../API/TodoService";
 import { useFetching } from "../../../Hooks/useFetching";
 import { useFilter } from "../../../Hooks/useFilter";
-import { AddForm } from "../../AddForm/AddForm";
 import { Filter } from "../../Filter/Filter";
 import { TodoList } from "../../TodoList/TodoList";
 import { Loader } from "../../UI/Loader/Loader";
-import { DefaultPage } from "../DefaultPage/DefaultPage";
 import { ModalForm } from "../../UI/ModalForm/ModalForm";
-import { Button } from "../../UI/Button/Button";
+import { MyButton } from "../../UI/MyButton/MyButton";
+import { DefaultPage } from "../DefaultPage/DefaultPage";
+
 export const Main = () => {
   const [todos, setTodos] = useState([]);
-  const [sort, setSort] = useState("");
-  const [query, setQuery] = useState("");
-  const [isModal, setIsModal] = useState(false);
-  const sortedAndSearchTodos = useFilter(sort, todos, query);
+  const [filter, setFilter] = useState({ sort: "", query: "" });
+  const [isModal, setIsModal] = useState(true);
+
+  const sortedAndSearchTodos = useFilter(filter.sort, todos, filter.query);
   const [fetching, isLoading, error] = useFetching(async () => {
     const response = await TodoService.getTodos();
     setTodos(response);
@@ -31,9 +31,9 @@ export const Main = () => {
   };
   return (
     <div className="App">
-      <Button onClick={showModal}>add Todo</Button>
+      <MyButton onClick={showModal}>add Todo</MyButton>
       <ModalForm createTodos={createTodos} isModal={isModal} />
-      <Filter sort={sort} query={query} setQuery={setQuery} setSort={setSort} />
+      <Filter filter={filter} setFilter={setFilter} />
       {isLoading && <Loader />}
       {error && <h1>{error}</h1>}
       {sortedAndSearchTodos.length === 0 && !isLoading ? (

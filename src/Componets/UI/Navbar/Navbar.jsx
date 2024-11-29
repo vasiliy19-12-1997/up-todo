@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import { useContext } from "react";
 import { AuthContext } from "../../../App";
-import { Button } from "../Button/Button";
+import { MyButton } from "../MyButton/MyButton";
+
 export const Navbar = () => {
   const [auth, setAuth] = useContext(AuthContext);
   const logOut = () => {
@@ -21,7 +22,7 @@ export const Navbar = () => {
         <div>
           <h1>Index</h1>
         </div>
-        <Button onClick={logOut}>logOut</Button>
+        <MyButton onClick={logOut}>logOut</MyButton>
       </nav>
     </div>
   );

@@ -1,6 +1,7 @@
 import { useContext } from "react";
 import { AuthContext } from "../../../App";
-import { Button } from "../../UI/Button/Button";
+
+import { MyButton } from "../../UI/MyButton/MyButton";
 
 export const Login = () => {
   const [login, setLogin] = useContext(AuthContext);
@@ -11,7 +12,7 @@ export const Login = () => {
   return (
     <div>
       <h1>Login</h1>
-      <Button onClick={loginToApp}>Login</Button>
+      <MyButton onClick={loginToApp}>Login</MyButton>
     </div>
   );
 };

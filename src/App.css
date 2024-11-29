@@ -37,3 +37,18 @@ a {
   color: rgb(229, 229, 229);
   margin: 0px 5px;
 }
+
+.todos-enter {
+  opacity: 0;
+}
+.todos-enter-active {
+  opacity: 1;
+  transition: opacity 500ms ease-in;
+}
+.todos-exit {
+  opacity: 1;
+}
+.todos-exit-active {
+  opacity: 0;
+  transition: opacity 500ms ease-in;
+}
