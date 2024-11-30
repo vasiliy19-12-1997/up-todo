@@ -2,7 +2,6 @@
   padding: 0px;
   margin: 0px;
 }
-
 .App {
   box-sizing: border-box;
   margin: 0px 40px 0px 40px;
@@ -22,22 +21,41 @@
   gap: 30px;
 }
 .home-todos {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+@media (max-width: 570px) {
+  .home-todos {
+    flex-direction: column;
+  }
+  .navbar {
+    display: none;
+  }
+}
+.add-form {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  min-width: 40vw;
+  max-width: 30vw;
+  gap: 10px;
 }
-.add-form {
-  box-sizing: inherit;
-  margin-bottom: 20px;
+.add-form-input {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
 }
 a {
   text-decoration: none;
   color: rgb(229, 229, 229);
   margin: 0px 5px;
 }
-
+.filter {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
 .todos-enter {
   opacity: 0;
 }

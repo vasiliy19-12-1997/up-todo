@@ -8,7 +8,6 @@ export const TodoItem = ({ todo, deleteTodo }) => {
     setisCompleted(!isCompleted);
     deleteTodo(id);
   };
-
   return (
     <div className={s.TodoItem}>
       <div>
@@ -26,7 +25,7 @@ export const TodoItem = ({ todo, deleteTodo }) => {
         <h4>{todo.priorite}</h4>
       </div>
       <div>
-        <MyButton onClick={() => deleteTodo(todo.id)}>deleteTodo</MyButton>
+        <MyButton onClick={() => deleteTodo(todo.id)}>delete</MyButton>
       </div>
     </div>
   );

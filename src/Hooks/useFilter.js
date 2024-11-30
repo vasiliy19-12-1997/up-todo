@@ -13,8 +13,8 @@ export function useFilter(sort, todos, query) {
   const sortedTodos = useSorted(sort, todos);
   const sortedAndSearchTodos = useMemo(() => {
     if (query) {
-      return sortedTodos.filter((post) =>
-        post.title?.toLowerCase().includes(query?.toLowerCase())
+      return sortedTodos.filter((todo) =>
+        todo.title?.toLowerCase().includes(query?.toLowerCase())
       );
     } else {
       return sortedTodos;

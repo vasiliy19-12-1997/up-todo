@@ -3,6 +3,7 @@
   height: 5vh;
   min-width: 30vw;
   margin: 0 20px;
-  padding: 5px;
+  padding: 10px;
   color: rgb(229, 229, 229);
+  border-radius: 20px;
 }

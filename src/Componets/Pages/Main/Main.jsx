@@ -8,12 +8,12 @@ import { Loader } from "../../UI/Loader/Loader";
 import { ModalForm } from "../../UI/ModalForm/ModalForm";
 import { MyButton } from "../../UI/MyButton/MyButton";
 import { DefaultPage } from "../DefaultPage/DefaultPage";
+import { AddForm } from "./../../AddForm/AddForm";
 
 export const Main = () => {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState({ sort: "", query: "" });
-  const [isModal, setIsModal] = useState(true);
-
+  const [isModal, setIsModal] = useState(false);
   const sortedAndSearchTodos = useFilter(filter.sort, todos, filter.query);
   const [fetching, isLoading, error] = useFetching(async () => {
     const response = await TodoService.getTodos();
@@ -26,14 +26,14 @@ export const Main = () => {
   useEffect(() => {
     fetching();
   }, []);
-  const showModal = () => {
-    setIsModal(!isModal);
-  };
   return (
     <div className="App">
-      <MyButton onClick={showModal}>add Todo</MyButton>
-      <ModalForm createTodos={createTodos} isModal={isModal} />
       <Filter filter={filter} setFilter={setFilter} />
+      <MyButton onClick={() => setIsModal(!isModal)}>AddTodo</MyButton>
+      <ModalForm isModal={isModal} setIsModal={setIsModal}>
+        {<AddForm createTodos={createTodos} />}
+      </ModalForm>
+
       {isLoading && <Loader />}
       {error && <h1>{error}</h1>}
       {sortedAndSearchTodos.length === 0 && !isLoading ? (

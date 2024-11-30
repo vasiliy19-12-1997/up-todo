@@ -1,5 +1,4 @@
 import tasks from "../../../Images/tasks.jpg";
-
 export const DefaultPage = () => {
   return (
     <div className="home">

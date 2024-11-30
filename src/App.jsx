@@ -1,8 +1,7 @@
+import { createContext, useEffect, useState } from "react";
 import { BrowserRouter } from "react-router-dom";
 import "./App.css";
 import { AppRouter } from "./Componets/Router/AppRouter";
-import { createContext, useContext } from "react";
-import { useState, useEffect } from "react";
 import { Navbar } from "./Componets/UI/Navbar/Navbar";
 export const AuthContext = createContext("auth");
 export default function App() {

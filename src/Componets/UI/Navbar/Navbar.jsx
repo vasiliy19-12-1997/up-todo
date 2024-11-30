@@ -1,5 +1,5 @@
-import { Link } from "react-router-dom";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { AuthContext } from "../../../App";
 import { MyButton } from "../MyButton/MyButton";
 
@@ -18,9 +18,6 @@ export const Navbar = () => {
           <Link to="/Link3">ссылка3</Link>
           <Link to="/Link4">ссылка4</Link>
           <Link to="/">Home</Link>
-        </div>
-        <div>
-          <h1>Index</h1>
         </div>
         <MyButton onClick={logOut}>logOut</MyButton>
       </nav>

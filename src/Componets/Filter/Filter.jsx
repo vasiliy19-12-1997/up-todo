@@ -1,9 +1,12 @@
 import { Input } from "../UI/Input/Input";
 import { MySelect } from "../UI/MySelect/MySelect";
-
 export const Filter = ({ filter, setFilter }) => {
   return (
-    <div style={{ marginBottom: "20px" }} className="select">
+    <div className="filter">
+      <Input
+        value={filter.query}
+        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
+      />
       <MySelect
         options={[
           { value: "title", name: "По заголовку" },
@@ -12,10 +15,6 @@ export const Filter = ({ filter, setFilter }) => {
         value={filter.sort}
         defaultValue={"Сортировка по"}
         onChange={(selectSort) => setFilter({ ...filter, sort: selectSort })}
-      />
-      <Input
-        value={filter.query}
-        onChange={(e) => setFilter({ ...filter, query: e.target.value })}
       />
     </div>
   );
