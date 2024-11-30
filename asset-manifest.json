@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/up-todo/static/css/main.7fb8af40.css",
+    "main.js": "/up-todo/static/js/main.4a0793c5.js",
+    "static/media/tasks.jpg": "/up-todo/static/media/tasks.aa83901368f20a3d671a.jpg",
+    "index.html": "/up-todo/index.html",
+    "main.7fb8af40.css.map": "/up-todo/static/css/main.7fb8af40.css.map",
+    "main.4a0793c5.js.map": "/up-todo/static/js/main.4a0793c5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7fb8af40.css",
+    "static/js/main.4a0793c5.js"
+  ]
+}
