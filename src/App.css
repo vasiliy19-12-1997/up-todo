@@ -14,20 +14,21 @@
 }
 .home {
   display: flex;
-  width: auto;
   justify-content: center;
   flex-direction: column;
   align-items: center;
   gap: 30px;
 }
 .home-todos {
-  margin-top: 20px;
   display: flex;
+  flex-direction: column;
   justify-content: center;
+  margin: 20px 80px 20px 80px;
 }
 @media (max-width: 570px) {
   .home-todos {
     flex-direction: column;
+    margin: 15px 20px 0px 20px;
   }
   .navbar {
     display: none;
